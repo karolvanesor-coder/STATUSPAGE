@@ -1,5 +1,5 @@
 import { useEffect, useState, useCallback } from "react";
-import { getServicesToday } from "../services/apiClient"; // Llama a /health
+import { getServicesStatus } from "../services/apiClient";
 import "../styles/StatusPage.css";
 
 export default function StatusPage() {
@@ -15,7 +15,7 @@ export default function StatusPage() {
 
   const fetchStatus = useCallback(async () => {
     try {
-      const res = await getServicesToday();
+      const res = await getServicesStatus(); // Usa overall_status + checks
 
       const formatted = res.checks.map((c) => ({
         service_name: c.component,
@@ -23,8 +23,14 @@ export default function StatusPage() {
       }));
 
       setServices(formatted);
-      const allOk = formatted.every((s) => s.status === "OK");
-      setOverall(allOk ? "ok" : "down");
+
+      if (res.overall_status === "Available") {
+        setOverall("ok");
+      } else if (res.overall_status === "Unavailable") {
+        setOverall("down");
+      } else {
+        setOverall("partial");
+      }
     } catch {
       setOverall("down");
     }
@@ -39,10 +45,18 @@ export default function StatusPage() {
 
   return (
     <div className="status-page">
-      <div className="main-icon">✅</div>
+      <div className="main-icon">
+        {overall === "ok" && "☁️✨"}
+        {overall === "partial" && "⛅⚠️"}
+        {overall === "down" && "🌩️❌"}
+      </div>
+      
       <h1 className="main-title">
-        {overall === "ok" ? "All services are online" : "Some services are down"}
+        {overall === "ok" && "All services are online"}
+        {overall === "down" && "All services are down"}
+        {overall === "partial" && "Some services are partially available"}
       </h1>
+
       <p className="updated-text">
         Last updated on {new Date().toLocaleTimeString()}
       </p>
@@ -59,7 +73,9 @@ export default function StatusPage() {
                   setExpanded((prev) => ({ ...prev, [index]: !prev[index] }))
                 }
               >
-                <span className="service-name-row">✅ {service.service_name}</span>
+                <span className="service-name-row">
+                  ✅ {service.service_name}
+                </span>
                 <span
                   className={`service-status-badge ${
                     service.status === "OK" ? "ok" : "down"
@@ -72,13 +88,11 @@ export default function StatusPage() {
               {isOpen && (
                 <div className="accordion-content">
                   <div className="service-metrics">
-                    <span className="uptime-value">100.000%</span>
                     <span className="last-updated">
                       Last updated: {new Date().toLocaleTimeString()}
                     </span>
                   </div>
 
-                  {/* === Barra única de hoy === */}
                   <div
                     className="service-bar"
                     onMouseEnter={(e) =>
