@@ -26,22 +26,30 @@ async def fetch_health(url: str):
 
 
 async def check_all_services():
-    services = json.loads(SERVICES_FILE.read_text())
+    service_groups = json.loads(SERVICES_FILE.read_text())
 
     results = []
     ok_count = 0
+    total = 0
 
-    for service in services:
-        status = await fetch_health(service["url"])
-        results.append({
-            "component": service["name"],
-            "status": "OK" if status == "up" else "Down"
-        })
-        if status == "up":
-            ok_count += 1
+    # Recorrido por grupos: apis, workers, crons
+    for group in service_groups:
+        group_name = group.get("group", "apis")
+        services = group.get("services", [])
 
-    total = len(results)
+        for service in services:
+            status = await fetch_health(service["url"])
+            results.append({
+                "component": service["name"],
+                "group": group_name,  # 👈 include group in response
+                "status": "OK" if status == "up" else "Down"
+            })
 
+            total += 1
+            if status == "up":
+                ok_count += 1
+
+    # Evaluamos estado general
     if ok_count == total:
         overall = "Available"
     elif ok_count == 0:

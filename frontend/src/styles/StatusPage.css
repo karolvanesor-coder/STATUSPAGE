@@ -202,3 +202,48 @@
 .status-bar.down {
   background-color: #ff4d4f !important; /* Rojo down */
 }
+
+.service-group-section {
+  background: #ffffff;
+  border-radius: 10px;
+  padding: 16px 20px;
+  margin: 20px 0;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+  border: 1px solid #e6e6e6;
+  transition: 0.2s ease-in-out;
+}
+
+.service-group-section:hover {
+  transform: translateY(-2px);
+}
+
+.service-group-title {
+  font-size: 1.1rem;
+  font-weight: 600;
+  margin-bottom: 12px;
+  color: #998;
+  border-bottom: 1px solid #eee;
+  padding-bottom: 6px;
+}
+
+.status-row {
+  padding: 10px 0;
+  border-bottom: 1px solid #f0f0f0;
+}
+
+.status-row:last-child {
+  border-bottom: none;
+}
+
+.status-header-row {
+  display: flex;
+  justify-content: space-between;
+  cursor: pointer;
+  padding: 6px 0;
+}
+
+.status-container-card {
+  width: 100%;
+  max-width: 900px;
+  margin: 0 auto;
+}

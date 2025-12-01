@@ -1,26 +1,41 @@
 [
-  { "name": "payment_gateway", "url": "http://payment-gateway.prod.internal:8080/health" },
-  { "name": "dropi-produit", "url": "http://produit.prod.internal:8080/health" },
-  { "name": "dropi-orders", "url": "http://orders.prod.internal:8080/health" },
-  { "name": "dropi-configs", "url": "http://configs.prod.internal:8080/health" },
-  { "name": "dropi-finance", "url": "http://finance.prod.internal:8080/health" },
-  { "name": "dropi-external-notifications-services", "url": "http://external-notification.prod.internal:8080/health" },
-  { "name": "dropi-auth", "url": "http://auth.prod.internal:8080/health" },
-  { "name": "dropi-bifröst", "url": "http://bifrost.prod.internal:8080/health" },
-  { "name": "dropi-community", "url": "http://community.prod.internal:8080/health" },
-  { "name": "dropi-identity-validator", "url": "http://identity-validator.prod.internal:8080/health" },
-  { "name": "dropi-indicators", "url": "http://indicators.prod.internal:8080/health" },
-  { "name": "dropi-logistic", "url": "http://logistic.prod.internal:8080/health" },
-  { "name": "dropi-loyalty", "url": "http://loyalty.prod.internal:8080/health" },
-  { "name": "dropi-users", "url": "http://dropi-users.prod.internal:8080/health" },
-  { "name": "dropi-wallet", "url": "http://wallet.prod.internal:8080/health" },
-  { "name": "dropi-wallet-public", "url": "http://wallet-public.prod.internal:8080/health" },
-  { "name": "profit-pro-services", "url": "http://profit-pro.prod.internal:8080/health" },
-  { "name": "white-label-api", "url": "http://white-label.prod.internal:8080/health" },
-  { "name": "wms-integration-app", "url": "http://wms.prod.internal:8080/health" },
-  { "name": "wallet-file-processor", "url": "http://wallet-fileprocessor.prod.internal:8080/health" },
-  { "name": "dropi-finance-consumer-worker", "url": "http://finance-worker.prod.internal:8080/health" },
-  { "name": "external-notifications-consumer", "url": "http://ext-consumer.prod.internal:8080/health" },
-  { "name": "dropi-order-consumer-worker", "url": "http://order-worker.prod.internal:8080/health" },
-  { "name": "dropi-product-jobs", "url": "http://product-jobs.prod.internal:8080/health" }
+  {
+    "group": "apis",
+    "services": [
+      { "name": "payment_gateway", "url": "http://payment-gateway.prod.internal:8080/health" },
+      { "name": "dropi-produit", "url": "http://produit.prod.internal:8080/health" },
+      { "name": "dropi-orders", "url": "http://orders.prod.internal:8080/health" },
+      { "name": "dropi-configs", "url": "http://configs.prod.internal:8080/health" },
+      { "name": "dropi-finance", "url": "http://finance.prod.internal:8080/health" },
+      { "name": "dropi-external-notifications-services", "url": "http://external-notification.prod.internal:8080/health" },
+      { "name": "dropi-auth", "url": "http://auth.prod.internal:8080/health" },
+      { "name": "dropi-bifröst", "url": "http://bifrost.prod.internal:8080/health" },
+      { "name": "dropi-community", "url": "http://community.prod.internal:8080/health" },
+      { "name": "dropi-identity-validator", "url": "http://identity-validator.prod.internal:8080/health" },
+      { "name": "dropi-indicators", "url": "http://indicators.prod.internal:8080/health" },
+      { "name": "dropi-logistic", "url": "http://logistic.prod.internal:8080/health" },
+      { "name": "dropi-loyalty", "url": "http://loyalty.prod.internal:8080/health" },
+      { "name": "dropi-users", "url": "http://dropi-users.prod.internal:8080/health" },
+      { "name": "dropi-wallet", "url": "http://wallet.prod.internal:8080/health" },
+      { "name": "dropi-wallet-public", "url": "http://wallet-public.prod.internal:8080/health" },
+      { "name": "profit-pro-services", "url": "http://profit-pro.prod.internal:8080/health" },
+      { "name": "white-label-api", "url": "http://white-label.prod.internal:8080/health" },
+      { "name": "wms-integration-app", "url": "http://wms.prod.internal:8080/health" }
+    ]
+  },
+  {
+    "group": "workers",
+    "services": [
+      { "name": "wallet-file-processor", "url": "http://wallet-fileprocessor.prod.internal:8080/health" },
+      { "name": "dropi-finance-consumer-worker", "url": "http://finance-worker.prod.internal:8080/health" },
+      { "name": "external-notifications-consumer", "url": "http://ext-consumer.prod.internal:8080/health" },
+      { "name": "dropi-order-consumer-worker", "url": "http://order-worker.prod.internal:8080/health" }
+    ]
+  },
+  {
+    "group": "crons",
+    "services": [
+      { "name": "dropi-product-jobs", "url": "http://product-jobs.prod.internal:8080/health" }
+    ]
+  }
 ]
