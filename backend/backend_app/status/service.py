@@ -3,7 +3,7 @@ import httpx
 from datetime import datetime
 from pathlib import Path
 
-SERVICES_FILE = Path("app/data/services.json")
+SERVICES_FILE = Path("backend_app/status/storage/services.json")
 
 
 async def fetch_health(url: str):
