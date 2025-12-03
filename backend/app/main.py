@@ -1,6 +1,6 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
-from backend_app.status.controller import router as service_router
+from status.handler.status_controller import router as service_router
 
 app = FastAPI(title="Status Page API", version="1.0.0")
 
