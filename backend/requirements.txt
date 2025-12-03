@@ -24,7 +24,7 @@ uvicorn==0.38.0
 correr back: 
 cd backend
 source venv/bin/activate
-uvicorn app.main:app --reload
+uvicorn app_cmd.main:app --reload
 
 correr front: 
 cd frontend 
