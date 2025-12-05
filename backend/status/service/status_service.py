@@ -29,7 +29,6 @@ async def fetch_health(url: str):
 
     return status
 
-
 async def check_all_services():
     service_groups = json.loads(SERVICES_FILE.read_text())
 
