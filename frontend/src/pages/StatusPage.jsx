@@ -86,7 +86,7 @@ export default function StatusPage() {
                       }))
                     }
                   >
-                    <span className="service-name-row">✅ {service.component}</span>
+                    <span className="service-name-row"> {service.component}</span>
                     <span
                       className={`service-status-badge ${
                         service.status === "OK" ? "ok" : "down"
