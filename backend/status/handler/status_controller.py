@@ -1,10 +1,12 @@
 from fastapi import APIRouter
+from typing import Any
 
 router = APIRouter(prefix="/api/services")
 
-service = None  # será inyectado desde main.py
+service: Any = None  
 
 
 @router.get("/health")
 async def all_health():
+    """Devuelve el estado de todos los servicios."""
     return await service.get_status()

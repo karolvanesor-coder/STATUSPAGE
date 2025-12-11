@@ -1,10 +1,21 @@
+from typing import Dict, Any
 from status.interface.interface_mapper import StatusMapperInterface
 
 
 class StatusMapperImpl(StatusMapperInterface):
+    """Implementación de StatusMapperInterface que normaliza datos crudos de servicios."""
 
-    def normalize(self, raw_data: dict) -> dict:
-        checks = raw_data["checks"]
+    def normalize(self, raw_data: Dict[str, Any]) -> Dict[str, Any]:
+        """
+        Convierte los datos crudos de servicios en una estructura lista para el dominio.
+
+        Args:
+            raw_data (Dict[str, Any]): Datos de servicios crudos, típicamente desde el repositorio.
+
+        Returns:
+            Dict[str, Any]: Diccionario con estado general y lista de componentes normalizados.
+        """
+        checks = raw_data.get("checks", [])
 
         up_count = sum(1 for c in checks if c["status"] == "up")
         total = len(checks)
@@ -16,7 +27,7 @@ class StatusMapperImpl(StatusMapperInterface):
         else:
             overall = "Partially Available"
 
-        # Convertimos "up/down" → "OK/Down"
+        # Mapear "up/down" → "OK/Down"
         output_checks = [
             {
                 "component": c["component"],

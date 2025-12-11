@@ -10,31 +10,59 @@ from status.mapper.mapper_impl import StatusMapperImpl
 from status.infra.telegram_notify import TelegramNotify
 from status.service.service_status import StatusServiceImpl
 
-app = FastAPI(title="Status Page API", version="1.0.0")
 
-# Middleware
-app.add_middleware(
-    CORSMiddleware,
-    allow_origins=["*"],
-    allow_credentials=True,
-    allow_methods=["*"],
-    allow_headers=["*"],
-)
+def create_app() -> FastAPI:
+    """Inicializa y configura la aplicación FastAPI."""
+    app = FastAPI(
+        title="Status Page API",
+        version="1.0.0",
+    )
 
-repo = StatusRepositoryImpl()
-mapper = StatusMapperImpl()
+    # --------------------
+    # Middleware CORS
+    # --------------------
+    app.add_middleware(
+        CORSMiddleware,
+        allow_origins=["*"],
+        allow_credentials=True,
+        allow_methods=["*"],
+        allow_headers=["*"],
+    )
 
-# 📌 Aquí configuramos Telegram
-notify = TelegramNotify(
-    bot_token="8340353857:AAHTuZCnwl4Un6NcYE_oJB3Ia8885LwjYmg",
-    chat_id="-4814683898"
-)
+    # --------------------
+    # Dependencias core
+    # --------------------
+    repo = StatusRepositoryImpl()
+    mapper = StatusMapperImpl()
 
-# Inyectar dependencias
-status_controller.service = StatusServiceImpl(repo, mapper, notify)
+    # --------------------
+    # Notificaciones
+    # --------------------
+    telegram_notify = TelegramNotify(
+        bot_token="8340353857:AAHTuZCnwl4Un6NcYE_oJB3Ia8885LwjYmg",
+        chat_id="-4814683898",
+    )
 
-app.include_router(status_controller.router)
+    # --------------------
+    # Inyección de dependencias
+    # --------------------
+    status_controller.service = StatusServiceImpl(
+        repo=repo,
+        mapper=mapper,
+        notify=telegram_notify,
+    )
 
-@app.get("/")
-async def root():
-    return {"status": "Backend operativo 🚀"}
+    app.include_router(status_controller.router)
+
+    # --------------------
+    # Healthcheck
+    # --------------------
+    @app.get("/")
+    async def root():
+        return {"status": "Backend operativo 🚀"}
+
+    return app
+
+
+# Instancia principal de la aplicación
+app = create_app()
