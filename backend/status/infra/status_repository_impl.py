@@ -30,18 +30,28 @@ class StatusRepositoryImpl(StatusRepository):
                 for service in group.get("services", []):
                     status = "down"
                     try:
-                        response = await client.get(service["url"], timeout=4)
-                        body = response.json()
+                        response = await client.get(
+                            service["url"],
+                            timeout=4,
+                            follow_redirects=True
+                        )
 
-                        value = body.get("overall_status") or body.get("status") or ""
-                        if value.lower() in UP_KEYWORDS:
+                        # 1️⃣ Si responde 200 → está UP (aunque no tenga JSON)
+                        if response.status_code == 200:
                             status = "up"
+
+                        # 2️⃣ Si tiene JSON válido con claves conocidas → mejor aún
+                        try:
+                            body = response.json()
+                            value = str(body.get("overall_status") or body.get("status") or "").lower()
+                            if value in UP_KEYWORDS:
+                                status = "up"
+                        except Exception:
+                            # Si no es JSON válido, no pasa nada
+                            pass
 
                     except httpx.RequestError:
                         # Mantener 'down' si ocurre un error de conexión
-                        pass
-                    except json.JSONDecodeError:
-                        # Mantener 'down' si la respuesta no es JSON válido
                         pass
 
                     results.append({

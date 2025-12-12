@@ -37,5 +37,13 @@
     "services": [
       { "name": "dropi-product-jobs", "url": "http://product-jobs.prod.internal:8080/health" }
     ]
-  }
+  },
+  {
+  "group": "core",
+  "services": [
+    { "name": "envia-dropi", "url": "https://envia.dropi.co" },
+    { "name": "notificaciones-dropi", "url": "https://notificaciones.dropi.co" },
+    { "name": "reports-dropi", "url": "https://reports.dropi.co" }
+  ]
+  } 
 ]
