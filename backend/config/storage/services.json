@@ -43,7 +43,19 @@
   "services": [
     { "name": "envia-dropi", "url": "https://envia.dropi.co" },
     { "name": "notificaciones-dropi", "url": "https://notificaciones.dropi.co" },
-    { "name": "reports-dropi", "url": "https://reports.dropi.co" }
+    { "name": "reports-dropi", "url": "https://reports.dropi.co" },
+    { "name": "dropi-api-co 🇨🇴", "url": "https://api.dropi.co/" },
+    { "name": "dropi-api-ec 🇪🇨", "url": "https://api.dropi.ec/" },
+    { "name": "dropi-api-cl 🇨🇱", "url": "https://api.dropi.cl/" },
+    { "name": "dropi-api-mx 🇲🇽", "url": "https://api.dropi.mx/" },
+    { "name": "dropi-api-py 🇵🇾", "url": "https://api.dropi.com.py/" },
+    { "name": "dropi-api-pa 🇵🇦", "url": "https://api.dropi.pa/" },
+    { "name": "dropi-api-pe 🇵🇪", "url": "https://api.dropi.pe/" },
+    { "name": "dropi-api-gt 🇬🇹", "url": "https://api.dropi.gt/" },
+    { "name": "dropi-api-ar 🇦🇷", "url": "https://api.dropi.ar/" },
+    { "name": "dropi-api-ve 🇻🇪", "url": "https://api.dropi.com.ve/" },
+    { "name": "dropi-api-ro 🇷🇴", "url": "https://api.dropi.ro/" },
+    { "name": "dropi-api-cr 🇨🇷", "url": "https://api.dropi.cr/" }
   ]
   } 
 ]
