@@ -2,14 +2,9 @@ from abc import ABC, abstractmethod
 
 
 class NotifyInterface(ABC):
-    """Interfaz para notificaciones de servicios."""
+    """Contrato para el envío de notificaciones."""
 
     @abstractmethod
     async def send(self, message: str) -> None:
-        """
-        Envía un mensaje de notificación.
-
-        Args:
-            message (str): El mensaje a enviar.
-        """
+        """Envía un mensaje de notificación."""
         pass

@@ -12,9 +12,7 @@ class TelegramNotify(NotifyInterface):
     async def send(self, message: str) -> None:
         """
         Envía un mensaje al chat de Telegram configurado.
-
-        Args:
-            message (str): El texto a enviar.
+        
         """
         url = f"https://api.telegram.org/bot{self.bot_token}/sendMessage"
         payload = {"chat_id": self.chat_id, "text": message}
